@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import bcrypt from "bcrypt";
 const UserSchema = new mongoose.Schema({
     username: {
         type: String,
@@ -22,5 +23,9 @@ const UserSchema = new mongoose.Schema({
     resetPasswordExpire: Date,
 });
 
+UserSchema.pre("save", async function (next) {
+    this.password = await bcrypt.hashSync(this.password, 10); // 10 is salt
+    next();
+});
 const User = mongoose.model("User", UserSchema);
 export default User;
