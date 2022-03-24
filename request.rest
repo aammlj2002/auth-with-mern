@@ -1,0 +1,13 @@
+POST http://localhost:2000/api/auth/register
+
+###
+POST http://localhost:2000/api/auth/login
+
+###
+POST http://localhost:2000/api/auth/forgotpassword
+
+###
+PUT http://localhost:2000/api/auth/resetpassword/1999
+
+###
+
