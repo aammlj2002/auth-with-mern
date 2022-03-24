@@ -1,4 +1,11 @@
 POST http://localhost:2000/api/auth/register
+Content-Type: application/json
+
+{
+    "username": "aammlj2002",
+    "email": "aammlj2002@gmail.com",
+    "password": "00000000"
+}
 
 ###
 POST http://localhost:2000/api/auth/login

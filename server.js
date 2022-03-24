@@ -1,10 +1,18 @@
 import "dotenv/config";
 import express from "express";
+import connectDB from "./config/db.js";
 import authRouter from "./routes/auth.js";
+connectDB();
 const app = express();
 app.use(express.json());
 
 app.use("/api/auth", authRouter);
 
 const PORT = process.env.PORT || 4000;
-app.listen(PORT);
+const server = app.listen(PORT);
+
+// log error
+process.on("unhandledRejection", (err, promise) => {
+    console.log(`Logged Error: ${err}`);
+    server.close(() => process.exit(1));
+});
