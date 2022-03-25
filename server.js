@@ -1,12 +1,16 @@
 import "dotenv/config";
 import express from "express";
 import connectDB from "./config/db.js";
+import ErrorHandler from "./middleware/errorHandler.js";
 import authRouter from "./routes/auth.js";
 connectDB();
 const app = express();
 app.use(express.json());
 
 app.use("/api/auth", authRouter);
+
+// Error handler
+app.use(ErrorHandler);
 
 const PORT = process.env.PORT || 4000;
 const server = app.listen(PORT);
