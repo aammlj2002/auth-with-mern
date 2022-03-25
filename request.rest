@@ -24,3 +24,8 @@ PUT http://localhost:2000/api/auth/resetpassword/1999
 
 ###
 
+GET http://localhost:2000/api/private/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyM2Q3NjI1MTgxMjM3OGM4M2UxZTNmMiIsImlhdCI6MTY0ODIwMjQ4MCwiZXhwIjoxNjQ4MjAyNzgwfQ.I-TlT3OMj4C1JM9P3rOtagaN1tvvCGDiBsn07igZC9M
+
+###
+

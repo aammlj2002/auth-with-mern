@@ -3,11 +3,13 @@ import express from "express";
 import connectDB from "./config/db.js";
 import ErrorHandler from "./middleware/errorHandler.js";
 import authRouter from "./routes/auth.js";
+import privateRouter from "./routes/private.js";
 connectDB();
 const app = express();
 app.use(express.json());
 
 app.use("/api/auth", authRouter);
+app.use("/api/private", privateRouter);
 
 // Error handler
 app.use(ErrorHandler);
