@@ -26,8 +26,22 @@ const login = async (req, res, next) => {
         res.status(500).json({ success: false, error: error.message });
     }
 };
-const forgotPassword = (req, res, next) => {
-    res.send("forgotPassword route");
+const forgotPassword = async (req, res, next) => {
+    const { email } = req.body;
+    try {
+        const user = await User.findOne({ email });
+        if (!user) return next(new ErrorResponse("email could be sent", 404));
+
+        const resetToken = user.getResetPasswordToken();
+        await user.save();
+        const resetUrl = `${process.env.APP_URL}/passwordreset/${resetToken}`;
+
+        const message = `
+            <h1>You have requested a password reset</h1>
+            <p>please go to this link to reset your password</p>
+            <a href="${resetUrl}" clicktracking=off>${resetUrl}</a>
+        `;
+    } catch (err) {}
 };
 const resetPassword = (req, res, next) => {
     res.send("resetPassword route");
