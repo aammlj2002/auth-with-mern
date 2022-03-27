@@ -25,7 +25,12 @@ Content-Type: application/json
 }
 
 ###
-PUT http://localhost:2000/api/auth/resetpassword/1999
+PUT http://localhost:2000/api/auth/resetpassword/60b532e8daa373f6bb9fa21dcf946391c34f5449
+Content-Type: application/json
+
+{
+    "password": "12345678"
+}
 
 ###
 

@@ -1,4 +1,5 @@
 import User from "../models/User.js";
+import crypto from "crypto";
 import ErrorResponse from "../utils/errorResponse.js";
 import sendEmail from "../utils/sendEmail.js";
 
@@ -42,7 +43,7 @@ const forgotPassword = async (req, res, next) => {
 
         user.update();
 
-        const resetUrl = `http://localhost:3000/passwordreset/${resetToken}`;
+        const resetUrl = `http://localhost:2000/api/auth/resetpassword/${resetToken}`;
         console.log(resetUrl);
         const message = `
         <h1>You have requested a password reset</h1>
@@ -71,8 +72,28 @@ const forgotPassword = async (req, res, next) => {
     }
 };
 
-const resetPassword = (req, res, next) => {
-    res.send("resetPassword route");
+const resetPassword = async (req, res, next) => {
+    const resetPasswordToken = req.params.resetToken;
+    try {
+        const user = await User.findOne({
+            resetPasswordToken,
+            resetPasswordExpire: { $gt: Date.now() },
+        });
+        console.log(user);
+        if (!user) {
+            return next(new ErrorResponse("invalid reset password token", 400));
+        }
+        user.password = req.body.password;
+        user.resetPasswordToken = undefined;
+        user.resetPasswordExpire = undefined;
+        await user.save();
+        res.status(201).json({
+            success: true,
+            data: "password reset success",
+        });
+    } catch (error) {
+        next(error);
+    }
 };
 
 const sendToken = (user, statusCode, res) => {
