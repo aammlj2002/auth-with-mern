@@ -41,7 +41,7 @@ const forgotPassword = async (req, res, next) => {
         const resetToken = user.getResetPasswordToken();
         console.log(user);
 
-        user.update();
+        await user.save();
 
         const resetUrl = `http://localhost:2000/api/auth/resetpassword/${resetToken}`;
         console.log(resetUrl);
@@ -73,7 +73,7 @@ const forgotPassword = async (req, res, next) => {
 };
 
 const resetPassword = async (req, res, next) => {
-    const resetPasswordToken = req.params.resetToken;
+    const resetPasswordToken = crypto.createHash("sha256").update(req.params.resetToken).digest("hex");
     try {
         const user = await User.findOne({
             resetPasswordToken,

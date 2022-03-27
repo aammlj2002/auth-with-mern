@@ -26,7 +26,9 @@ const UserSchema = new mongoose.Schema({
 });
 
 UserSchema.pre("save", async function (next) {
-    this.password = bcrypt.hashSync(this.password, 10);
+    try {
+        this.password = bcrypt.hashSync(this.password, 10);
+    } catch (error) {}
     next();
 });
 UserSchema.methods.matchPassword = async function (password) {

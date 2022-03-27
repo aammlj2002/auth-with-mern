@@ -3,7 +3,7 @@ Content-Type: application/json
 
 {
     "username": "kyaw",
-    "email": "kyawlinnaingwin8@gmail.com",
+    "email": "kyawlinnaingwin9@gmail.com",
     "password": "00000000"
 }
 
@@ -12,7 +12,7 @@ POST http://localhost:2000/api/auth/login
 Content-Type: application/json
 
 {
-    "email": "john@doe.com",
+    "email": "kyawlinnaingwin9@gmail.com",
     "password": "00000000"
 }
 
@@ -21,15 +21,15 @@ POST http://localhost:2000/api/auth/forgotpassword
 Content-Type: application/json
 
 {
-    "email": "kyawlinnaingwin8@gmail.com"
+    "email": "kyawlinnaingwin9@gmail.com"
 }
 
 ###
-PUT http://localhost:2000/api/auth/resetpassword/60b532e8daa373f6bb9fa21dcf946391c34f5449
+PUT http://localhost:2000/api/auth/resetpassword/26eebf0527f08eafd6d2e3c6963cd1a1300c0876
 Content-Type: application/json
 
 {
-    "password": "12345678"
+    "password": "00000000"
 }
 
 ###
