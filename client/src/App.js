@@ -10,11 +10,11 @@ const App = () => {
         <div>
             <Router>
                 <Routes>
-                    <Route path="/" element={<HomeScreen/>} />
-                    <Route path="/login" element={<LoginScreen/>} />
-                    <Route path="/register" element={<RegisterScreen/>} />
-                    <Route path="/forgotpassword" element={<ForgotPasswordScreen/>} />
-                    <Route path="/resetpassword/:resetToken" element={<ResetPasswordScreen/>} />
+                    <Route path="/" element={<HomeScreen />} />
+                    <Route path="/login" element={<LoginScreen />} />
+                    <Route path="/register" element={<RegisterScreen />} />
+                    <Route path="/forgotpassword" element={<ForgotPasswordScreen />} />
+                    <Route path="/resetpassword/:resetToken" element={<ResetPasswordScreen />} />
                 </Routes>
             </Router>
         </div>
