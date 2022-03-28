@@ -1,5 +1,6 @@
 import nodemailer from "nodemailer";
 const sendEmail = (options) => {
+    // create mail transpoter
     const transporter = nodemailer.createTransport({
         service: process.env.EMAIL_SERVICE,
         auth: {
@@ -8,6 +9,7 @@ const sendEmail = (options) => {
         },
     });
 
+    // mail option schema
     const mailOptions = {
         from: process.env.EMAIL_FROM,
         to: options.to,
@@ -15,6 +17,7 @@ const sendEmail = (options) => {
         html: options.text,
     };
 
+    // send mail
     transporter.sendMail(mailOptions, function (err, info) {
         if (err) {
             console.log(err);
