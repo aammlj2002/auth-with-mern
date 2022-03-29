@@ -11,7 +11,16 @@ const register = async (req, res, next) => {
         const user = await User.create({ username, email, password });
         sendToken(user, 201, res);
     } catch (error) {
-        next(error);
+        let errors = {};
+        let e = error.message;
+        e = e.substring(e.indexOf(":") + 1).trim();
+        e = e.split(",").map((e) => e.trim());
+        e.forEach((err) => {
+            const [key, value] = err.split(":").map((e) => e.trim());
+            errors[key] = value;
+        });
+        errors = JSON.stringify(errors);
+        res.json({ success: false, errors });
     }
 };
 
