@@ -2,6 +2,7 @@ import User from "../models/User.js";
 import crypto from "crypto";
 import ErrorResponse from "../utils/errorResponse.js";
 import sendEmail from "../utils/sendEmail.js";
+import errorFormatter from "../utils/errorFormatter.js";
 
 // register user
 const register = async (req, res, next) => {
@@ -11,15 +12,8 @@ const register = async (req, res, next) => {
         const user = await User.create({ username, email, password });
         sendToken(user, 201, res);
     } catch (error) {
-        let errors = {};
-        let e = error.message;
-        e = e.substring(e.indexOf(":") + 1).trim();
-        e = e.split(",").map((e) => e.trim());
-        e.forEach((err) => {
-            const [key, value] = err.split(":").map((e) => e.trim());
-            errors[key] = value;
-        });
-        errors = JSON.stringify(errors);
+        // format errors
+        let errors = errorFormatter(error);
         res.json({ success: false, errors });
     }
 };

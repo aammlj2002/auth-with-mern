@@ -19,9 +19,6 @@ const RegisterScreen = (props) => {
         if (password !== comfirmPassword) {
             setPassword("");
             setComfirmPassword("");
-            setTimeout(() => {
-                setErrors("");
-            }, 5000);
             return setErrors({ comfirmPassword: "password do not match" });
         }
         try {
@@ -73,7 +70,7 @@ const RegisterScreen = (props) => {
                                 />
                                 {errors.password && <span className="text-red-500">{errors.password}</span>}
                             </div>
-                            <div className="mb-5">
+                            <div className="">
                                 <label className="mb-1 text-sm text-gray-900">Comfirm Pasword</label>
                                 <input
                                     type="password"
@@ -84,7 +81,7 @@ const RegisterScreen = (props) => {
                                 {errors.comfirmPassword && <span className="text-red-500">{errors.comfirmPassword}</span>}
                             </div>
                             {errors.message && <span className="text-red-500">{errors.message}</span>}
-                            <div className="flex w-full">
+                            <div className="flex w-full mt-6">
                                 <button
                                     type="submit"
                                     className="w-full px-4 py-2 text-base font-semibold text-center text-white transition duration-200 ease-in bg-blue-500 rounded-lg shadow-md hover:bg-blue-600"
