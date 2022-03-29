@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
-import InputText from "../components/InputText";
+import Input from "../components/Input";
 import Button from "../components/Button";
 import Error from "../components/Error";
 
@@ -47,28 +47,28 @@ const RegisterScreen = (props) => {
                             {/* username */}
                             <div className="mb-5">
                                 <label className="mb-1 text-sm text-gray-900">Username</label>
-                                <InputText value={username} onChange={(e) => setUsername(e.target.value)} />
+                                <Input value={username} onChange={(e) => setUsername(e.target.value)} />
                                 {errors.username && <Error>{errors.username}</Error>}
                             </div>
 
                             {/* email */}
                             <div className="mb-5">
                                 <label className="mb-1 text-sm text-gray-900">Email</label>
-                                <InputText value={email} onChange={(e) => setEmail(e.target.value)} />
+                                <Input value={email} onChange={(e) => setEmail(e.target.value)} />
                                 {errors.email && <Error>{errors.email}</Error>}
                             </div>
 
                             {/* passowrd */}
                             <div className="mb-5">
                                 <label className="mb-1 text-sm text-gray-900">Password</label>
-                                <InputText value={password} onChange={(e) => setPassword(e.target.value)} />
+                                <Input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
                                 {errors.password && <Error>{errors.password}</Error>}
                             </div>
 
                             {/* comfirm password */}
                             <div>
                                 <label className="mb-1 text-sm text-gray-900">Comfirm Pasword</label>
-                                <InputText value={comfirmPassword} onChange={(e) => setComfirmPassword(e.target.value)} />
+                                <Input type="password" value={comfirmPassword} onChange={(e) => setComfirmPassword(e.target.value)} />
                                 {errors.comfirmPassword && <span className="text-red-500">{errors.comfirmPassword}</span>}
                             </div>
                             {errors.message && <Error>{errors.message}</Error>}
