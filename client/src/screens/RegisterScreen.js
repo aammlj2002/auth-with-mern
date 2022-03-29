@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
+import InputText from "../components/InputText";
+import Button from "../components/Button";
+import Error from "../components/Error";
 
 const RegisterScreen = (props) => {
     const [username, setUsername] = useState("");
@@ -40,54 +43,37 @@ const RegisterScreen = (props) => {
                     <div className="self-center text-xl font-light text-gray-600">Regitser Account</div>
                     <div className="mt-4">
                         <form onSubmit={registerHandler} autoComplete="off">
+
+                            {/* username */}
                             <div className="mb-5">
                                 <label className="mb-1 text-sm text-gray-900">Username</label>
-                                <input
-                                    type="text"
-                                    className="flex-1 w-full px-4 py-2 text-base text-gray-700 placeholder-gray-400 bg-white border border-gray-300 rounded-lg shadow-sm appearance-none focus:outline-none focus:ring-2 focus:ring-gray-300 focus:border-transparent"
-                                    value={username}
-                                    onChange={(e) => setUsername(e.target.value)}
-                                />
-                                {errors.username && <span className="text-red-500">{errors.username}</span>}
+                                <InputText value={username} onChange={(e) => setUsername(e.target.value)} />
+                                {errors.username && <Error>{errors.username}</Error>}
                             </div>
+
+                            {/* email */}
                             <div className="mb-5">
                                 <label className="mb-1 text-sm text-gray-900">Email</label>
-                                <input
-                                    type="text"
-                                    className="flex-1 w-full px-4 py-2 text-base text-gray-700 placeholder-gray-400 bg-white border border-gray-300 rounded-lg shadow-sm appearance-none focus:outline-none focus:ring-2 focus:ring-gray-300 focus:border-transparent"
-                                    value={email}
-                                    onChange={(e) => setEmail(e.target.value)}
-                                />
-                                {errors.email && <span className="text-red-500">{errors.email}</span>}
+                                <InputText value={email} onChange={(e) => setEmail(e.target.value)} />
+                                {errors.email && <Error>{errors.email}</Error>}
                             </div>
+
+                            {/* passowrd */}
                             <div className="mb-5">
                                 <label className="mb-1 text-sm text-gray-900">Password</label>
-                                <input
-                                    type="password"
-                                    className="flex-1 w-full px-4 py-2 text-base text-gray-700 placeholder-gray-400 bg-white border border-gray-300 rounded-lg shadow-sm appearance-none focus:outline-none focus:ring-2 focus:ring-gray-300 focus:border-transparent"
-                                    value={password}
-                                    onChange={(e) => setPassword(e.target.value)}
-                                />
-                                {errors.password && <span className="text-red-500">{errors.password}</span>}
+                                <InputText value={password} onChange={(e) => setPassword(e.target.value)} />
+                                {errors.password && <Error>{errors.password}</Error>}
                             </div>
-                            <div className="">
+
+                            {/* comfirm password */}
+                            <div>
                                 <label className="mb-1 text-sm text-gray-900">Comfirm Pasword</label>
-                                <input
-                                    type="password"
-                                    className="flex-1 w-full px-4 py-2 text-base text-gray-700 placeholder-gray-400 bg-white border border-gray-300 rounded-lg shadow-sm appearance-none focus:outline-none focus:ring-2 focus:ring-gray-300 focus:border-transparent"
-                                    value={comfirmPassword}
-                                    onChange={(e) => setComfirmPassword(e.target.value)}
-                                />
+                                <InputText value={comfirmPassword} onChange={(e) => setComfirmPassword(e.target.value)} />
                                 {errors.comfirmPassword && <span className="text-red-500">{errors.comfirmPassword}</span>}
                             </div>
-                            {errors.message && <span className="text-red-500">{errors.message}</span>}
+                            {errors.message && <Error>{errors.message}</Error>}
                             <div className="flex w-full mt-6">
-                                <button
-                                    type="submit"
-                                    className="w-full px-4 py-2 text-base font-semibold text-center text-white transition duration-200 ease-in bg-blue-500 rounded-lg shadow-md hover:bg-blue-600"
-                                >
-                                    Login
-                                </button>
+                                <Button type="submit">Sign Up</Button>
                             </div>
                         </form>
                     </div>
