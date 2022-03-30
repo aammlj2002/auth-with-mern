@@ -17,17 +17,24 @@ const LoginScreen = () => {
             },
         };
         try {
-            const { data } = await axios.post("http://localhost:8000/api/auth/login", { email, password }, config);
-            localStorage.setItem("authToken", data.token);
-            if (data.error) {
-                setErrors(data.error);
-                return;
+            try {
+                // user login
+                let user = await axios.post("http://localhost:8000/api/auth/login", { email, password }, config);
+                if (!user) {
+                    setPassword("");
+                    setErrors({ message: "something went wrong, please try again" });
+                }
+
+                // redirect to home route
+                navigate("/");
+            } catch (error) {
+                setPassword("");
+                setErrors({ message: error.response.data.error });
             }
-            navigate("/");
         } catch (error) {
+            setPassword("");
             setErrors({ message: "something went wrong, please try again" });
         }
-        console.log("foo");
     };
     return (
         <div className="min-h-screen bg-gray-100 ralative">
@@ -40,16 +47,14 @@ const LoginScreen = () => {
                             <div className="mb-5">
                                 <label className="mb-1 text-sm text-gray-900">Email</label>
                                 <Input value={email} onChange={(e) => setEmail(e.target.value)} />
-                                {errors.email && <Error>{errors.email}</Error>}
                             </div>
 
                             {/* passowrd */}
                             <div className="mb-5">
                                 <label className="mb-1 text-sm text-gray-900">Password</label>
                                 <Input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
-                                {errors.password && <Error>{errors.password}</Error>}
                             </div>
-                            {errors.message && <Error>{errors.message}</Error>}
+                            {errors && <Error>{errors.message}</Error>}
                             <div className="flex w-full mt-6">
                                 <Button type="submit">Sign Up</Button>
                             </div>

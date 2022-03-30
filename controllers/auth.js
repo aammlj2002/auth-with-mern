@@ -14,6 +14,7 @@ const register = async (req, res, next) => {
     } catch (error) {
         // format errors
         let errors = errorFormatter(error);
+
         res.json({ success: false, errors });
     }
 };
@@ -22,16 +23,16 @@ const register = async (req, res, next) => {
 const login = async (req, res, next) => {
     const { email, password } = req.body;
 
-    if (!email || !password) return next(new ErrorResponse("please provide an email and password", 400));
+    if (!email || !password) return next(new ErrorResponse("invalid credentials", 400));
 
     try {
         // find user form db with inputed email
         const user = await User.findOne({ email }).select("+password");
-        if (!user) return next(new ErrorResponse("invalid credentials", 401));
+        if (!user) return next(new ErrorResponse("invalid credentials", 400));
 
         // check is inputed password correct
         const isMatch = await user.matchPassword(password);
-        if (!isMatch) return next(new ErrorResponse("wrong password", 401));
+        if (!isMatch) return next(new ErrorResponse("wrong password", 400));
 
         sendToken(user, 200, res);
     } catch (error) {
